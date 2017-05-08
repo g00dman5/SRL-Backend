@@ -25,8 +25,6 @@ class UserController extends Controller
       "name" => "required",
       "email" => "required",
       "password" => "required",
-      "userID" => "required",
-      "roleID" => "required",
       "address" => "required",
       "phone" => "required",
     ];
@@ -43,11 +41,8 @@ class UserController extends Controller
     $user->name= $request->input('name');
     $user->email= $request->input('email');
     $user->password= Hash::make($request->input("password"));
-    $user->userID= $request->input('userID');
-    $user->roleId= $request->input('roleID');
     $user->address= $request->input('address');
     $user->phone= $request->input('phone');
-
     $user->save();
 
     return Response::json(['success'=> "Welcome aboard!"]);
@@ -55,6 +50,13 @@ class UserController extends Controller
 
   public function update($id, Request $request)
   {
+    $validator =
+    Validator::make($Purifier::clean($request->all()), $rules);
+
+    if($validator->fails())
+    {
+      return Response::json(["error" => "All fields required."]);
+    }
     //Finds user based on id
     $user = User::find($id);
     $user->name= $request->input('name');
@@ -62,9 +64,6 @@ class UserController extends Controller
     $user->password= $request->input('password');
     $user->address= $request->input('address');
     $user->phone= $request->input('phone');
-    $user->roleID= $request->input('roleID');
-    $user->userID= $request->input('userID');
-
     $user->save();
 
     return Response::json(['success'=> "Greetings"]);
