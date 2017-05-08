@@ -37,7 +37,7 @@ class OrderController extends Controller
 
     $order= new Order;
     $order->orderID= $request->input('orderID');
-    $order->userID= $request->input('userID');
+    $order->userID=Auth::userID()->id;
     $order->productID= $request->input('productID');
     $order->quantity= $request->input('quantity');
     $order->totalPrice= $request->input('totalPrice');
