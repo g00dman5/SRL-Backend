@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Order;
+use Auth;
 use Response;
 use Illuminate\Support\Facades\Validator;
 use Purifier;
