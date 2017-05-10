@@ -9,7 +9,6 @@ use Purifier;
 
 class ProductController extends Controller
 {
-  {
     //lists Products
     public function index()
     {
@@ -84,5 +83,4 @@ class ProductController extends Controller
 
       return Response::json(['success' => 'Product Deleted.']);
     }
-
 }

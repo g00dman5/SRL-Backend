@@ -8,9 +8,17 @@ use Auth;
 use Response;
 use Illuminate\Support\Facades\Validator;
 use Purifier;
+use JWTAuth;
+
 
 class OrderController extends Controller
 {
+  //php constructor
+  public function __construct()
+  {                                         //the functions that i want authenticated
+    $this->middleware('jwt.auth', ['only'=>['store','update']]);
+  }
+
   public function index()
   {
     $orders = Order::all();
