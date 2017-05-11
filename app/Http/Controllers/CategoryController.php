@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Category;
 use Illuminate\Http\Request;
 use App\Order;
 use Response;
@@ -18,15 +18,21 @@ class CategoryController extends Controller
   public function store(Request $request)
   {
     $rules = [
-      'categoryID'=>'required',
       'name'=>'required',
     ];
+
+    $validator = Validator::make($Purifier::clean($request->all()), $rules);
+
+    if($validator->fails())
+    {
+      return Response::json(["error" => "All fields must be completed."]);
+    }
+
   }
 
   public function update($id, Request $request)
   {
-    $category = Category::find($id)
-    $category->categoryID = $request->input('categoryID');
+    $category = Category::find($request->input(categoryID));
     $category->name = $request->input('name');
     $category->save();
   }

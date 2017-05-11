@@ -29,8 +29,7 @@ class UserController extends Controller
       "phone" => "required",
     ];
 
-    $validator =
-    Validator::make($Purifier::clean($request->all()), $rules);
+    $validator = Validator::make($Purifier::clean($request->all()), $rules);
 
     if($validator->fails())
     {

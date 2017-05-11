@@ -21,13 +21,20 @@ class ProductController extends Controller
     {
       $rules = [
         "name" => "required",
-        "productID" => "required",
         "categoryID" => "required",
         "price" => "required",
         "description" => "required",
         "availability" => "required",
         "image" => "required",
       ];
+
+      $validator = Validator::make($Purifier::clean($request->all()), $rules);
+
+      if($validator->fails())
+      {
+        return Response::json(["error" => "All fields must be completed."]);
+      }
+
 
 
       $product= new Product;

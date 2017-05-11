@@ -20,9 +20,9 @@ Route::get('showProduct/{id}', 'ProductController@show');
 Route::post('deleteProduct/{id}', 'ProductController@destroy');
 
 Route::post('storeRole', 'RoleController@store');
-Route::post('getRoles', 'RoleController@index');
+Route::get('getRoles', 'RoleController@index');
 Route::post('updateRole/{id}', 'RoleController@update');
-Route::post('showRole/{id}', 'RoleController@show');
+Route::get('showRole/{id}', 'RoleController@show');
 Route::post('deleteRole/{id}', 'RoleController@destroy');
 
 Route::post('storeCategory', 'CategoryController@store');

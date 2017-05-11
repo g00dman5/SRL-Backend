@@ -23,7 +23,7 @@ class OrderController extends Controller
   {
     $orders = Order::all();
 
-    return Response::json($categories);
+    return Response::json($orders);
   }
 
   public function store(Request $request)

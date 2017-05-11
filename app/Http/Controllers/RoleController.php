@@ -10,9 +10,9 @@ class RoleController extends Controller
 {
   public function index(Request $request)
   {
-    $roles= Role::all();
+    $roles = Role::all();
 
-    return Response::json($roles)
+    return Response::json($roles);
   }
 
   public function store(Request $request)
@@ -21,11 +21,19 @@ class RoleController extends Controller
       'roleID'=>'required',
       'name'=>'required',
     ];
+
+    $validator = Validator::make($Purifier::clean($request->all()), $rules);
+
+    if($validator->fails())
+    {
+      return Response::json(["error" => "All fields must be completed."]);
+    }
+
   }
 
   public function update($id, Request $requst)
   {
-    $role = Role::find($id)
+    $role = Role::find($id);
     $role->roleID = $request->input('roleID');
     $role->name = $request->input('name');
     $role->save();
@@ -33,9 +41,9 @@ class RoleController extends Controller
 
   public function show($id)
   {
-    $role = Role::find($id)
+    $role = Role::find($id);
 
-    return Response::json($role)
+    return Response::json($role);
   }
 
   public function destroy($id)
